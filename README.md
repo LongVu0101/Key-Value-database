@@ -4,6 +4,26 @@ A small key-value database written in pure C99: a hash table with separate
 chaining, save/load to disk, an interactive shell, and a test suite that
 runs clean under Valgrind.
 
+## Dự án này là gì?
+
+Đây là một dự án **cơ sở dữ liệu key-value đơn giản** viết bằng C99.
+Dữ liệu được lưu trong bộ nhớ bằng bảng băm (hash table), có thể:
+
+- `SET`/`GET`/`DEL` để thao tác key-value
+- `SAVE` để ghi dữ liệu ra file
+- `LOAD` để nạp lại dữ liệu từ file
+
+## Vai trò của từng file
+
+| File             | Vai trò |
+|------------------|---------|
+| `main.c`         | Chương trình CLI tương tác (`SET`, `GET`, `DEL`, `SAVE`, `LOAD`, `HELP`, `EXIT`). |
+| `kvstore.h`      | Header khai báo cấu trúc dữ liệu (`Node`, `HashTable`) và API public của KV store. |
+| `hashtable.c`    | Logic lõi trong bộ nhớ: tạo bảng băm, thêm/sửa, đọc, xoá, giải phóng dữ liệu. |
+| `persistence.c`  | Logic lưu/đọc dữ liệu từ đĩa với định dạng file `KVSTORE1`. |
+| `test_kvstore.c` | Bộ test cho các trường hợp chính: CRUD, collision, save/load, file lỗi. |
+| `Makefile`       | Script build/test: tạo binary `kvstore`, `test_kvstore`, chạy test và memcheck. |
+
 ## Build and run
 
 ```sh
